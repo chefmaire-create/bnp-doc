@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BNP Paribas — Espace Privé</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;min-height:100vh;background:linear-gradient(135deg,#003d1f 0%,#006633 60%,#009966 100%);display:flex;align-items:center;justify-content:center;padding:20px}
+.box{background:#fff;border-radius:16px;padding:40px 32px;width:100%;max-width:400px;box-shadow:0 24px 64px rgba(0,0,0,.35)}
+.logo{text-align:center;margin-bottom:32px}
+.logo-wrap{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:10px}
+.logo-ico{width:56px;height:56px;background:linear-gradient(135deg,#006633,#009966);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.5rem}
+.logo-txt h1{font-size:1.4rem;font-weight:900;color:#006633;letter-spacing:.02em}
+.logo-txt span{font-size:.7rem;color:#009966;font-weight:700;letter-spacing:.15em;text-transform:uppercase}
+.logo p{font-size:.75rem;color:#8a94a6;margin-top:6px}
+.divider{height:2px;background:linear-gradient(90deg,#009966,#00cc88,#009966);border-radius:2px;margin-bottom:24px}
+.err{display:none;background:#fdecea;border:1px solid #f5c6c2;border-radius:8px;padding:9px 12px;margin-bottom:14px;font-size:.81rem;color:#c0392b;gap:7px;align-items:center}
+.err.show{display:flex}
+.fl{margin-bottom:16px}
+.fl label{display:block;font-size:.69rem;font-weight:700;color:#8a94a6;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
+.iw{position:relative}
+.iw i.ic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#009966;font-size:.85rem;pointer-events:none}
+.iw input{width:100%;padding:12px 40px 12px 38px;border:1.5px solid #dde2ec;border-radius:9px;font-size:.88rem;color:#1a1f36;background:#fafbff;outline:none;transition:.2s;font-family:inherit}
+.iw input:focus{border-color:#009966;box-shadow:0 0 0 3px rgba(0,153,102,.1)}
+.eye{position:absolute;right:9px;top:50%;transform:translateY(-50%);background:#eef1f8;border:1.5px solid #dde2ec;border-radius:6px;width:28px;height:25px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#8a94a6;transition:.2s}
+.eye:hover{background:#009966;color:#fff;border-color:#009966}
+.btn{width:100%;padding:14px;background:linear-gradient(135deg,#006633,#009966);color:#fff;border:none;border-radius:9px;font-size:.92rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;transition:.2s;box-shadow:0 4px 14px rgba(0,102,51,.3);font-family:inherit}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,102,51,.4)}
+.secure{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:16px;font-size:.7rem;color:#8a94a6}
+.secure i{color:#009966}
+.footer{text-align:center;margin-top:22px;font-size:.68rem;color:rgba(255,255,255,.3)}
+.spin{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:999}
+.spin.on{display:flex}
+.spin div{width:42px;height:42px;border:4px solid rgba(255,255,255,.2);border-top-color:#009966;border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div>
+  <div class="box">
+    <div class="logo">
+      <div class="logo-wrap">
+        <img src="https://i.ibb.co/mVgzpVXQ/BNP-Paribas.png" alt="BNP Paribas" style="height:64px;object-fit:contain;display:block;margin:0 auto">
+      </div>
+      <p>Espace Documentaire Privé — Accès Sécurisé</p>
+    </div>
+    <div class="divider"></div>
+    <div class="err" id="err"><i class="fas fa-exclamation-triangle"></i><span>Identifiant ou mot de passe incorrect.</span></div>
+    <div class="fl">
+      <label>Identifiant client</label>
+      <div class="iw"><i class="fas fa-user ic"></i><input type="text" id="u" placeholder="Votre identifiant"></div>
+    </div>
+    <div class="fl">
+      <label>Mot de passe</label>
+      <div class="iw">
+        <i class="fas fa-lock ic"></i>
+        <input type="password" id="p" placeholder="••••••••">
+        <div class="eye" id="eye"><i class="fas fa-eye" id="eye-ico"></i></div>
+      </div>
+    </div>
+    <button class="btn" id="btnlogin"><i class="fas fa-sign-in-alt"></i> ACCÉDER À MON ESPACE</button>
+    <div class="secure"><i class="fas fa-shield-alt"></i> Connexion sécurisée SSL 256 bits</div>
+  </div>
+  <p class="footer">© 2024 BNP Paribas SA — Tous droits réservés — Accès réservé aux clients autorisés</p>
+</div>
+<div class="spin" id="spin"><div></div></div>
+<script>
+document.getElementById("btnlogin").addEventListener("click", function() {
+  var u = document.getElementById("u").value.trim();
+  var p = document.getElementById("p").value;
+  document.getElementById("err").classList.remove("show");
+  if (u === "DjanIsFake" && p === "44454241") {
+    document.getElementById("spin").classList.add("on");
+    setTimeout(function() { window.location.href = "bnp_dashboard.html"; }, 900);
+  } else {
+    document.getElementById("err").classList.add("show");
+    document.getElementById("p").value = "";
+  }
+});
+document.getElementById("eye").addEventListener("click", function() {
+  var inp = document.getElementById("p");
+  var ico = document.getElementById("eye-ico");
+  if (inp.type === "password") { inp.type = "text"; ico.className = "fas fa-eye-slash"; }
+  else { inp.type = "password"; ico.className = "fas fa-eye"; }
+});
+document.addEventListener("keypress", function(e) {
+  if (e.key === "Enter") document.getElementById("btnlogin").click();
+});
+</script>
+</body>
+</html>
